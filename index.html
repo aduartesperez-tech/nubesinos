@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nubesinos — Panadería Artesanal</title>
+  <style>
+    :root {
+      --amarillo: #F0C659;
+      --amarillo-osc: #E8A839;
+      --azul: #24376F;
+      --cafe: #8D6943;
+      --crema: #FCF3DC;
+      --oscuro: #201812;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Segoe UI", "Trebuchet MS", system-ui, sans-serif;
+      color: var(--azul);
+      background: var(--crema);
+      line-height: 1.6;
+    }
+
+    .script {
+      font-family: "Segoe Script", "Brush Script MT", "Bradley Hand", cursive;
+    }
+
+    /* ---------- NAV ---------- */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(32, 24, 18, 0.92);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 30px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    nav .brand {
+      display: flex;
+      align-items: center;
+    }
+    nav .brand img { height: 48px; width: auto; display: block; }
+    nav .brand .slash { color: var(--amarillo); font-size: 2rem; font-weight: 300; margin: 0 12px; line-height: 1; }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 26px;
+      flex-wrap: wrap;
+    }
+    nav ul a {
+      color: #fff;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: .82rem;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      transition: color .2s;
+    }
+    nav ul a:hover { color: var(--amarillo); }
+    nav .tel { color: var(--amarillo); font-weight: 700; font-size: .95rem; }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      position: relative;
+      min-height: 82vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      padding: 60px 20px;
+      background:
+        linear-gradient(rgba(20,14,10,0.55), rgba(20,14,10,0.75)),
+        url("img/barra.jpeg") center/cover no-repeat;
+    }
+    .hero .hero-logo {
+      width: clamp(220px, 40vw, 340px);
+      height: auto;
+      margin-bottom: 22px;
+      filter: drop-shadow(0 12px 30px rgba(0,0,0,.4));
+    }
+
+    .hero h1 {
+      font-size: clamp(3.5rem, 12vw, 7rem);
+      line-height: 1;
+      text-shadow: 0 6px 24px rgba(0,0,0,.5);
+      color: #fff;
+    }
+    .hero .tagline {
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      font-size: clamp(.9rem, 2.5vw, 1.2rem);
+      margin: 14px 0 20px;
+      color: var(--amarillo);
+      font-weight: 600;
+    }
+    .hero p.intro {
+      max-width: 560px;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #f3ead9;
+    }
+    .hero .cta {
+      margin-top: 30px;
+      display: inline-block;
+      background: var(--amarillo-osc);
+      color: var(--oscuro);
+      text-decoration: none;
+      padding: 14px 38px;
+      border-radius: 999px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: transform .2s, background .2s;
+    }
+    .hero .cta:hover { transform: translateY(-3px); background: var(--amarillo); }
+
+    /* ---------- SECCIONES ---------- */
+    section { padding: 70px 20px; }
+    .wrap { max-width: 1100px; margin: 0 auto; }
+
+    .sec-head { text-align: center; margin-bottom: 46px; }
+    .sec-head .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: var(--cafe);
+      font-weight: 700;
+      font-size: .85rem;
+    }
+    .sec-head h2 {
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      color: var(--azul);
+      margin-top: 6px;
+    }
+    .sec-head .rule {
+      width: 70px; height: 4px; background: var(--amarillo-osc);
+      margin: 16px auto 0; border-radius: 3px;
+    }
+
+    /* Nosotros */
+    .nosotros { background: #fff; }
+    .nosotros .row {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 46px;
+      align-items: center;
+    }
+    .nosotros p { margin-bottom: 16px; color: #45403a; }
+
+    /* Colaboración Nubesinos X IEI */
+    .collab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      background: linear-gradient(160deg, var(--crema) 0%, #fff 100%);
+      border: 1px solid rgba(36,55,111,.12);
+      border-radius: 22px;
+      padding: 38px 30px;
+      box-shadow: 0 14px 34px rgba(36,55,111,.14);
+    }
+    .collab-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+    }
+    .collab-logos img {
+      height: 92px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 6px 14px rgba(0,0,0,.15));
+    }
+    .collab-x {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--amarillo-osc);
+      line-height: 1;
+    }
+    .collab-tag {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 800;
+      font-size: .95rem;
+      color: var(--azul);
+      text-align: center;
+    }
+    .collab-tag span { color: var(--cafe); }
+    .collab-sub {
+      text-align: center;
+      color: var(--cafe);
+      font-size: .85rem;
+      margin-top: -8px;
+    }
+
+    /* Destacados */
+    .destacados { background: var(--amarillo); }
+    .highlights {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 30px;
+    }
+    .hl-card {
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0,0,0,.14);
+      text-align: center;
+      transition: transform .2s;
+    }
+    .hl-card:hover { transform: translateY(-6px); }
+    .hl-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
+    .hl-card .body { padding: 20px; }
+    .hl-card h3 { color: var(--azul); text-transform: uppercase; letter-spacing: .5px; font-size: 1.15rem; }
+    .hl-card p { color: var(--cafe); font-size: .9rem; margin-top: 6px; }
+
+    /* Menú */
+    .menu { background: var(--crema); }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 24px;
+    }
+    .item {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 6px 18px rgba(36,55,111,.10);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .item:hover { transform: translateY(-6px); box-shadow: 0 16px 32px rgba(36,55,111,.20); }
+    .item > img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      display: block;
+      background: var(--crema);
+    }
+    .item .body {
+      padding: 16px 18px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+    .item .info h4 { color: var(--azul); font-size: 1.05rem; text-transform: uppercase; letter-spacing: .3px; }
+    .item .info span { font-size: .82rem; color: var(--cafe); display: block; margin-top: 3px; }
+    .item .precios { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+    .precio {
+      background: var(--cafe);
+      color: #fff;
+      font-weight: 700;
+      font-size: .82rem;
+      padding: 4px 12px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    /* SINPE */
+    .sinpe-sec {
+      background: linear-gradient(135deg, var(--azul) 0%, #16224a 100%);
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+    }
+    .sinpe-card {
+      max-width: 560px;
+      margin: 0 auto;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(240,198,89,.35);
+      border-radius: 26px;
+      padding: 40px 30px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.35);
+      position: relative;
+    }
+    .sinpe-badge {
+      display: inline-block;
+      background: var(--amarillo-osc);
+      color: var(--oscuro);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: .8rem;
+      padding: 7px 18px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+    }
+    .sinpe-card h2 {
+      font-size: clamp(1.6rem, 4vw, 2.3rem);
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .sinpe-card .sub { color: #d8cdb9; font-size: .95rem; margin-bottom: 26px; }
+    .sinpe-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      background: #fff;
+      color: var(--azul);
+      font-size: clamp(2rem, 8vw, 3.4rem);
+      font-weight: 800;
+      letter-spacing: 4px;
+      padding: 18px 30px;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.3);
+      cursor: pointer;
+      transition: transform .2s;
+    }
+    .sinpe-number:hover { transform: translateY(-3px); }
+    .sinpe-copy {
+      background: var(--amarillo);
+      border: none;
+      color: var(--oscuro);
+      font-size: 1.1rem;
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .sinpe-copy:hover { background: var(--amarillo-osc); }
+    .sinpe-hint { margin-top: 16px; color: var(--amarillo); font-size: .85rem; font-weight: 600; }
+    .sinpe-name { margin-top: 8px; color: #d8cdb9; font-size: .9rem; }
+    .sinpe-aviso {
+      margin-top: 22px;
+      background: rgba(240,198,89,.12);
+      border: 1px dashed rgba(240,198,89,.5);
+      border-radius: 14px;
+      padding: 14px 18px;
+      color: #f3ead9;
+      font-size: .85rem;
+      line-height: 1.5;
+    }
+
+    /* Apoyo IEI */
+    .iei { background: linear-gradient(160deg, var(--azul) 0%, #16224a 100%); color: #fff; }
+    .iei .sec-head h2 { color: #fff; }
+    .iei .sec-head .eyebrow { color: var(--amarillo); }
+    .iei .lead {
+      text-align: center;
+      max-width: 640px;
+      margin: -20px auto 46px;
+      color: #e7ddc9;
+      font-size: 1.05rem;
+    }
+    .iei-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 26px;
+    }
+    .iei-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(240,198,89,.28);
+      border-radius: 20px;
+      padding: 32px 26px;
+      text-align: center;
+      transition: transform .2s, background .2s;
+    }
+    .iei-card:hover { transform: translateY(-6px); background: rgba(255,255,255,.1); }
+    .iei-card .ico {
+      width: 64px; height: 64px;
+      margin: 0 auto 18px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--amarillo-osc);
+      color: var(--oscuro);
+      border-radius: 50%;
+      font-size: 1.8rem;
+    }
+    .iei-card h3 { color: var(--amarillo); font-size: 1.1rem; margin-bottom: 10px; }
+    .iei-card p { color: #e7ddc9; font-size: .95rem; }
+
+    /* Flyer */
+    .flyer-sec { background: #fff; text-align: center; padding: 70px 0 0; }
+    .flyer-sec img.flyer-full {
+      width: 100%;
+      display: block;
+      margin-top: 44px;
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      background: var(--oscuro);
+      color: #fff;
+      text-align: center;
+      padding: 50px 20px 40px;
+    }
+    footer .fbrand { margin-bottom: 14px; }
+    footer .fbrand img { height: 92px; width: auto; }
+    footer .fserv { color: #d8cdb9; margin-bottom: 26px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; font-size: .9rem; }
+    .contacto {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 16px 30px;
+      font-weight: 700; font-size: 1.05rem;
+    }
+    .contacto a { color: #fff; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+    .contacto a:hover { color: var(--amarillo); }
+    footer .copy { margin-top: 30px; font-size: .8rem; color: #8a8178; }
+
+    @media (max-width: 720px) {
+      .nosotros .row { grid-template-columns: 1fr; }
+      nav { justify-content: center; }
+      nav .tel { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="brand">
+      <img src="img/logo%20nubesinos2.png" alt="Nubesinos" />
+      <span class="slash">/</span>
+      <img src="img/logo%20iei%201.png" alt="IEI — Instituto de Educación Integral" />
+    </div>
+    <ul>
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#iei">IEI</a></li>
+      <li><a href="#menu">Menú</a></li>
+      <li><a href="#sinpe">SINPE</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <span class="tel">📞 Contacto: 8493-5678</span>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="inicio">
+    <img class="hero-logo" src="img/logo%20nubesinos2.png" alt="Nubesinos — Panadería Artesanal" />
+    <div class="tagline">Delicias desde las nubes</div>
+    <p class="intro">Panadería artesanal hecha con amor. Pan fresco, repostería y postres preparados cada día para endulzar tus momentos.</p>
+    <a href="#menu" class="cta">Ver el menú</a>
+  </header>
+
+  <!-- NOSOTROS -->
+  <section class="nosotros" id="nosotros">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Nuestra historia</div>
+        <h2>Sobre Nubesinos</h2>
+        <div class="rule"></div>
+      </div>
+      <div class="row">
+        <div class="collab">
+          <div class="collab-logos">
+            <img src="img/logo%20nubesinos2.png" alt="Logo Nubesinos" />
+            <span class="collab-x">✕</span>
+            <img src="img/logo%20iei%201.png" alt="Logo IEI" />
+          </div>
+          <div class="collab-tag">Nubesinos <span>×</span> IEI</div>
+          <div class="collab-sub">Un emprendimiento con propósito</div>
+        </div>
+        <div>
+          <p><strong>Nubesinos</strong> es un emprendimiento del <strong>IEI (Instituto de Educación Integral)</strong>, nacido del esfuerzo y la dedicación por ofrecer pan y repostería artesanal hechos con amor.</p>
+          <p>Este proyecto es impulsado por <strong>don Otto Silesky</strong>, quien acompaña e inspira cada paso de este emprendimiento, apostando por el trabajo, el aprendizaje y las oportunidades.</p>
+          <p>Cada producto se hornea de forma artesanal, con ingredientes seleccionados y recetas hechas con dedicación, como en casa. <strong>Contamos con servicio de entregas</strong> para llevarte las delicias directo a tu puerta. 🌤️</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENÚ -->
+  <section class="menu" id="menu">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Precios en colones</div>
+        <h2>Menú</h2>
+        <div class="rule"></div>
+      </div>
+
+      <div class="menu-grid">
+        <div class="item">
+          <img src="img/ChatGPT%20Image%2018%20jun%202026,%2001_33_19%20p.m..png" alt="Hogazas de pan de carbón activado" />
+          <div class="body">
+            <div class="info"><h4>Hogazas de Pan</h4><span>Carbón activado · Romero · Nuez · Tomate</span></div>
+            <div class="precios"><span class="precio">Consultar</span></div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="img/ChatGPT%20Image%2017%20jun%202026,%2001_05_48%20p.m..png" alt="Barra gallega" />
+          <div class="body">
+            <div class="info"><h4>Barra Gallega</h4><span>Pan tipo baguette</span></div>
+            <div class="precios"><span class="precio">₡1,000 und</span></div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="img/ChatGPT%20Image%2017%20jun%202026,%2001_14_28%20p.m..png" alt="Pan casero dulce" />
+          <div class="body">
+            <div class="info"><h4>Pan Casero Dulce</h4><span>Paquete de 5</span></div>
+            <div class="precios"><span class="precio">₡1,000</span></div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="img/ChatGPT%20Image%2017%20jun%202026,%2001_03_54%20p.m..png" alt="Almojábanas doraditas" />
+          <div class="body">
+            <div class="info"><h4>Almojábanas</h4><span>Doraditas y esponjosas</span></div>
+            <div class="precios"><span class="precio">₡500 und</span></div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="img/ChatGPT%20Image%2017%20jun%202026,%2001_07_27%20p.m..png" alt="Bonete salado" />
+          <div class="body">
+            <div class="info"><h4>Bonete Salado</h4><span>Pancito suave</span></div>
+            <div class="precios"><span class="precio">₡110 und</span></div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="img/ChatGPT%20Image%2017%20jun%202026,%2001_00_37%20p.m..png" alt="Alfajores rellenos" />
+          <div class="body">
+            <div class="info"><h4>Alfajores</h4><span>Rellenos y espolvoreados</span></div>
+            <div class="precios"><span class="precio">₡300 und</span></div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="img/ChatGPT%20Image%2017%20jun%202026,%2001_12_05%20p.m..png" alt="Galletas de naranja y chocolate" />
+          <div class="body">
+            <div class="info"><h4>Galletas Naranja / Choco</h4><span>Dos sabores en una</span></div>
+            <div class="precios"><span class="precio">₡700</span></div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="img/ChatGPT%20Image%2017%20jun%202026,%2003_33_22%20p.m..png" alt="Tres leches" />
+          <div class="body">
+            <div class="info"><h4>Tres Leches</h4><span>Bañado y cremoso</span></div>
+            <div class="precios"><span class="precio">₡1,500</span></div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="img/ChatGPT%20Image%2017%20jun%202026,%2012_53_59%20p.m..png" alt="Arrollado de canela" />
+          <div class="body">
+            <div class="info"><h4>Arrollado de Canela</h4><span>Rollo de canela glaseado</span></div>
+            <div class="precios"><span class="precio">₡1,000 und</span></div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="img/17%20jun%202026,%2011_08_50%20a.m.%20(1).png" alt="Torta Chilena" />
+          <div class="body">
+            <div class="info"><h4>Torta Chilena</h4><span>Por unidad o completa</span></div>
+            <div class="precios"><span class="precio">₡2,000 und</span><span class="precio">₡15,000 comp</span></div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="img/ChatGPT%20Image%2017%20jun%202026,%2001_13_10%20p.m..png" alt="Torta Rouge" />
+          <div class="body">
+            <div class="info"><h4>Torta Rouge</h4><span>Por unidad o completa</span></div>
+            <div class="precios"><span class="precio">₡2,000 und</span><span class="precio">₡15,000 comp</span></div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="img/Gemini_Generated_Image_38hvwb38hvwb38hv-removebg-preview_imgupscaler.ai_Beta_2K.jpg" alt="Queque de maracuyá" />
+          <div class="body">
+            <div class="info"><h4>Queque de Maracuyá</h4><span>Por unidad o completo</span></div>
+            <div class="precios"><span class="precio">₡2,000 und</span><span class="precio">₡8,000 comp</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SINPE -->
+  <section class="sinpe-sec" id="sinpe">
+    <div class="wrap">
+      <div class="sinpe-card">
+        <span class="sinpe-badge">📱 SINPE Móvil — Solo pagos</span>
+        <h2>Pagá fácil y rápido</h2>
+        <p class="sub">Hacé tu pedido y cancelá con SINPE Móvil al siguiente número:</p>
+        <div class="sinpe-number" id="sinpeNum" onclick="copiarSinpe()" title="Tocá para copiar">
+          <span>8707&nbsp;3237</span>
+          <button class="sinpe-copy" type="button" aria-label="Copiar número">📋</button>
+        </div>
+        <div class="sinpe-hint" id="sinpeHint">Tocá el número para copiarlo</div>
+        <div class="sinpe-name">Nubesinos · Panadería Artesanal</div>
+        <p class="sinpe-aviso">⚠️ Este número es <strong>únicamente para pagos por SINPE Móvil</strong>.<br>Para pedidos y consultas, escribinos al <strong>8493-5678</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- APOYO IEI -->
+  <section class="iei" id="iei">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Instituto de Educación Integral</div>
+        <h2>El IEI impulsa emprendedores</h2>
+        <div class="rule"></div>
+      </div>
+      <p class="lead">El IEI acompaña a sus estudiantes para que conviertan sus ideas en emprendimientos reales, sostenibles y hechos con sus propias manos. Nubesinos es una muestra viva de ese propósito.</p>
+      <div class="iei-grid">
+        <div class="iei-card">
+          <div class="ico">🤝</div>
+          <h3>Apoya a sus estudiantes</h3>
+          <p>El instituto respalda y da vida a los emprendimientos que nacen de sus propios estudiantes, creyendo en su talento y potencial.</p>
+        </div>
+        <div class="iei-card">
+          <div class="ico">🌱</div>
+          <h3>Emprendimientos sostenibles</h3>
+          <p>Pone énfasis en que cada estudiante logre un emprendimiento sostenible, construido y sostenido de su propia mano.</p>
+        </div>
+        <div class="iei-card">
+          <div class="ico">🚀</div>
+          <h3>Ayuda para despegar</h3>
+          <p>Brinda las ayudas y el acompañamiento necesarios para que los estudiantes puedan hacer despegar su emprendimiento.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLYER -->
+  <section class="flyer-sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Nuestro catálogo</div>
+        <h2>Desde las Nubes</h2>
+        <div class="rule"></div>
+      </div>
+    </div>
+    <img src="img/flyer-menu.jpeg" alt="Menú completo de Nubesinos" class="flyer-full" />
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contacto">
+    <div class="fbrand"><img src="img/logo%20nubesinos2.png" alt="Nubesinos" /></div>
+    <div class="fserv">Contamos con servicio de entregas</div>
+    <div class="contacto">
+      <a href="https://wa.me/50684935678" target="_blank">💬 8493-5678</a>
+      <a href="https://instagram.com/nubesinos" target="_blank">📷 NUBESINOS</a>
+      <a href="https://facebook.com/nubesinoshsa" target="_blank">👍 NUBESINOS HSA</a>
+    </div>
+    <div class="copy">© 2026 Nubesinos · Panadería Artesanal</div>
+  </footer>
+
+  <script>
+    function copiarSinpe() {
+      var numero = "87073237";
+      var hint = document.getElementById("sinpeHint");
+      navigator.clipboard.writeText(numero).then(function () {
+        hint.textContent = "✅ ¡Número copiado!";
+        setTimeout(function () { hint.textContent = "Tocá el número para copiarlo"; }, 2000);
+      }).catch(function () {
+        hint.textContent = "Número: 8707 3237";
+      });
+    }
+  </script>
+
+</body>
+</html>
